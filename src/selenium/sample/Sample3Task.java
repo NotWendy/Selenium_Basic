@@ -45,6 +45,7 @@ public class Sample3Task {
 //         check that value of second button is "This is also a button"
         List<WebElement> allElementsWithClass = driver.findElements(By.className("test"));
         System.out.println("Number of test class elements: " + allElementsWithClass.size());
+        assertEquals(5,allElementsWithClass.size());
         String buttonText = driver.findElement(By.id("buttonId")).getAttribute("value");
         assertEquals("This is also a button",buttonText);
     }
