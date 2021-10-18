@@ -1,3 +1,6 @@
+### Fork Info
+Created by Amirans Pirchalaisvili
+
 ### Setup 
 [see wiki](https://github.com/KristineK/selenium_java_basic/wiki/Setup)
 
