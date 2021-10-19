@@ -46,6 +46,24 @@ public class Sample4Task {
 //        check that the button "Clear Result" is clickable now
 //        click on "Clear Result"
 //        check that the text is still (""), but it is not displayed
+        WebElement numberInput = driver.findElement(By.id("number"));
+        numberInput.clear();
+        numberInput.sendKeys("17");
+
+        WebElement clearNumber = driver.findElement(By.id("clear_result_button_number"));
+        assertFalse(clearNumber.isEnabled());
+
+        WebElement resultNumber = driver.findElement(By.id("result_button_number"));
+        resultNumber.click();
+        WebElement resultText = driver.findElement(By.id("result_number"));
+        assertEquals("You entered number: \"17\"", resultText.getText());
+
+        assertTrue(clearNumber.isEnabled());
+        clearNumber.click();
+        assertFalse(resultText.isDisplayed());
+        //Selenium will not read text from an invisible element
+        assertEquals("", resultText.getText());
+
     }
 
     @Test
@@ -55,5 +73,10 @@ public class Sample4Task {
 //        click on "This is a link to Homepage"
 //        check that current url is not base_url
 //        verify that current url is homepage
+        assertEquals(driver.getCurrentUrl(), base_url);
+        driver.findElement(By.id("homepage_link")).click();
+        assertNotEquals(driver.getCurrentUrl(), base_url);
+        assertEquals(driver.getCurrentUrl(), "https://kristinek.github.io/site/");
+        
     }
 }
