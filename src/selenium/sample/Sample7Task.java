@@ -45,6 +45,26 @@ public class Sample7Task {
 //        tick  "Option 3"
 //        click result
 //        check that text 'You selected value(s): Option 2, Option 3' is being displayed
+        List<WebElement> checkBoxes = driver.findElements(By.cssSelector(".w3-check[type='checkbox']"));
+
+        for (WebElement checkBox : checkBoxes) {
+            assertFalse(checkBox.isSelected());
+        }
+
+        checkBoxes.get(1).click();
+
+        assertFalse(checkBoxes.get(0).isSelected());
+        assertFalse(checkBoxes.get(2).isSelected());
+        assertTrue(checkBoxes.get(1).isSelected());
+
+        checkBoxes.get(2).click();
+
+        WebElement resButton = driver.findElement(By.id("result_button_checkbox"));
+        resButton.click();
+
+        String resText = driver.findElement(By.id("result_checkbox")).getText();
+        assertEquals("You selected value(s): Option 2, Option 3", resText);
+
     }
 
 
@@ -58,6 +78,26 @@ public class Sample7Task {
 //        check that "Option 2" and "Option 3' are not select, but "Option 1" is selected
 //        click result
 //        check that 'You selected option: Option 1' text is being displayed
+        List<WebElement> radioButtons = driver.findElements(By.cssSelector(".w3-check[type='radio']"));
+
+        for (WebElement radioB : radioButtons) {
+            assertFalse(radioB.isSelected());
+        }
+
+        radioButtons.get(2).click();
+
+        assertFalse(radioButtons.get(0).isSelected());
+        assertFalse(radioButtons.get(1).isSelected());
+        assertTrue(radioButtons.get(2).isSelected());
+
+        radioButtons.get(0).click();
+
+        WebElement resButton = driver.findElement(By.id("result_button_ratio"));    //Ratio moment
+        resButton.click();
+
+        String resText = driver.findElement(By.id("result_radio")).getText();
+        assertEquals("You selected option: Option 1", resText);
+
     }
 
     @Test
@@ -68,6 +108,19 @@ public class Sample7Task {
 //        check that selected option is "Option 2"
 //        click result
 //        check that 'You selected option: Option 2' text is being displayed
+        Select dropdown = new Select(driver.findElement(By.id("vfb-12")));
+
+        dropdown.selectByVisibleText("Option 3");
+        assertEquals("Option 3", dropdown.getFirstSelectedOption().getText());
+        dropdown.selectByVisibleText("Option 2");
+        assertEquals("Option 2", dropdown.getFirstSelectedOption().getText());
+
+        WebElement resButton = driver.findElement(By.id("result_button_select"));
+        resButton.click();
+
+        String resText = driver.findElement(By.id("result_select")).getText();
+        assertEquals("You selected option: Option 2", resText);
+
     }
 
     @Test
@@ -75,6 +128,10 @@ public class Sample7Task {
 //         TODO:
 //        enter date '4 of July 2007' using calendar widget
 //        check that correct date is added
+        //WebElement datePickText = driver.findElement(By.id("vfb-8"));
+        //datePickText.click();
+
+
     }
 
     @Test
