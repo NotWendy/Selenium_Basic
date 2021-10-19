@@ -37,8 +37,8 @@ public class Sample6Task {
 //        2 ways to find text: "Heading 2 text":
         WebElement elem = driver.findElement(By.xpath("//*[@id='heading_1']"));
         System.out.println(elem.getText());
-        //elem = driver.findElement(By.xpath("/html/body/div[1]/h2[1]"));
-        //System.out.println(elem.getText());
+        elem = driver.findElement(By.xpath("/html/body/h2[1]"));
+        System.out.println(elem.getText());
 //        1-2 ways to find text: "Test Text 1"
         elem = driver.findElement(By.xpath("/html/body/div[4]/p[1]"));
         System.out.println(elem.getText());
