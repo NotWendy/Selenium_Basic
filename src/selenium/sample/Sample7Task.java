@@ -128,9 +128,26 @@ public class Sample7Task {
 //         TODO:
 //        enter date '4 of July 2007' using calendar widget
 //        check that correct date is added
-        //WebElement datePickText = driver.findElement(By.id("vfb-8"));
-        //datePickText.click();
+        WebElement datePicker = driver.findElement(By.id("vfb-8"));
+        datePicker.click();
 
+        WebElement calWidget = driver.findElement(By.id("ui-datepicker-div"));
+
+        WebElement calBack = calWidget.findElement(By.className("ui-datepicker-prev"));
+        WebElement calMonth = calWidget.findElement(By.className("ui-datepicker-month"));
+        WebElement calYear = calWidget.findElement(By.className("ui-datepicker-year"));
+
+        while (!((calMonth.getText() + " " + calYear.getText()).equals("July 2007"))) {
+            calBack.click();
+            Thread.sleep(100);
+            calBack = calWidget.findElement(By.className("ui-datepicker-prev"));
+            calMonth = calWidget.findElement(By.className("ui-datepicker-month"));
+            calYear = calWidget.findElement(By.className("ui-datepicker-year"));
+        }
+
+        calWidget.findElement(By.xpath("//a[text()='4']")).click();
+        driver.findElement(By.id("result_button_date")).click();
+        assertEquals("You entered date: 07/04/2007", driver.findElement(By.id("result_date")).getText());
 
     }
 
@@ -139,5 +156,14 @@ public class Sample7Task {
 //         TODO:
 //        enter date '2 of May 1959' using text
 //        check that correct date is added
+        WebElement datePicker = driver.findElement(By.id("vfb-8"));
+        datePicker.sendKeys("05/02/1959");
+
+        //Click outside of the calendar widget to close it, because the result button is behind it
+        driver.findElement(By.xpath("/html/body/div[4]/div[3]/div/h2")).click();
+        driver.findElement(By.id("result_button_date")).click();
+
+        assertEquals("You entered date: 05/02/1959", driver.findElement(By.id("result_date")).getText());
+
     }
 }
